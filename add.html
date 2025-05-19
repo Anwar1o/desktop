@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title> add</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2> add</h2>
+  <form id="addForm">
+    <input type="text" placeholder="Name" id="name" required />
+    <input type="email" placeholder="Email" id="email" required />
+    <input type="text" placeholder="Phone" id="phone" required />
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    document.getElementById("addForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+
+      let data = JSON.parse(localStorage.getItem("customData")) || [];
+      data.push({ name, email, phone });
+      localStorage.setItem("customData", JSON.stringify(data));
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
