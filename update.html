@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>user form </title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h2>  user form</h2>
+  <form id="updateForm">
+    <input type="text" id="name" required />
+    <input type="email" id="email" required />
+    <input type="text" id="phone" required />
+    <button type="submit">Submit</button>
+  </form>
+  <script>
+    const index = localStorage.getItem("editIndex");
+    let data = JSON.parse(localStorage.getItem("customData")) || [];
+    if (index !== null && data[index]) {
+      document.getElementById("name").value = data[index].name;
+      document.getElementById("email").value = data[index].email;
+      document.getElementById("phone").value = data[index].phone;
+
+      document.getElementById("updateForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        data[index].name = document.getElementById("name").value;
+        data[index].email = document.getElementById("email").value;
+        data[index].phone = document.getElementById("phone").value;
+        localStorage.setItem("customData", JSON.stringify(data));
+        localStorage.removeItem("editIndex");
+        window.location.href = "index.html";
+      });
+    }
+  </script>
+</body>
+</html>
